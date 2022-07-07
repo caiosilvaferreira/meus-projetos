@@ -1,0 +1,26 @@
+TIPOS PRIMITIVOS QUE MAIS USO (PADROES)
+
+TIPO STRINGS ( CHAR, VARCHAR,TINYTEXT,TEXT,LONGTEXT,ENUM)
+
+CHAR — uma cadeia de caracteres (string), de tamanho fixo e não-binária
+VARCHAR — uma string de tamanho variável e não-binária]
+TINYTEXT — uma string não-binária e de tamanho bem reduzido
+TEXT — uma string não-binária e pequena
+LONGTEXT — uma string não-binária de tamanho grande
+ENUM — de acordo com o manual do MySQL, é uma string, com um valor que precisa ser selecionado de uma lista predefinida na criação da tabela
+
+
+--------------------------------------------------------------------------------------
+
+TIPO DATA  ( DATE, YEAR)
+
+DATE — o valor referente a uma data no formato 'CCYY-MM-DD'. Por exemplo 1985-11-25 (ano-mês-dia). O 'CC' se refere aos dois dígitos do século (Century, em inglês)
+
+YEAR — armazena um ano no formato 'CCYY' ou 'YY'
+
+--------------------------------------------------------------------------------------
+TIPOS PRIMITIVOS DADOS NUMERICOS (TINYINT, INT, DECIMAL)
+
+TINYINT — número inteiro muito pequeno (tiny);
+INT — número inteiro de tamanho comum;
+DECIMAL — número decimal, de ponto fixo;

@@ -1,0 +1,167 @@
+CODIGOS DO TERMINAL PARA CONSULTA
+
+DESCRIBE "PESSOAS" - descreva "pessoas" que é a pasta criada. 
+
+SHOW DATABASES - mostrar base de dados criado. 
+
+STATUS - status do banco de dados atual.
+
+SHOW TABLES - mostrar quais são as tabelas.
+
+USE CADASTRO - usando o terminal cadastro. 
+
+; - final de comando 
+
+--------------------------------------------------------------------------------------------------------------------
+MYSQL
+
+DDL - DATA DEFINITION LANGUAGE
+
+
+CREATE DATABASE - criando base de dados 
+
+CREATE TABLE - criando tabela
+
+DEFAULT CHARACTER SET UTF8 -  comando para palavras com caratecters especiais 
+
+DEFAULT COLLATE UTF8_GENERAL_CI - comando para palavras com caratecters especiais 
+
+DESCRIBE DADOS - ele descreve os valores da tabela dados.
+
+DROP DATABASE 'LIVROS'-apaga a base de dados 'cadastro'
+
+DROP TABLE DADOS - apaga tabela nome
+
+SHOW DATABASES - lista todos bancos de disponiveis
+
+SHOW TABLES - lista todas tabelas disponiveis no banco selecionado
+
+TRUNCATE TABLE DADOS- limpa o conteudo de uma tabela
+
+USE LIVROS - seleciona um banco ou troca o banco ja selecionado para um novo
+
+--------------------------------------------------------------------------------------------------------------------
+
+DML - DATA MANIPULATION LANGUAGE
+
+DELETE FROM tabela; - Deleta todas linhas de uma tabela
+
+DELETE FROM tabela WHERE condicao; - Deleta as linhas especificadas pela condição
+
+INSERT INTO tabela (coluna1,...) VALUES (valor1,...); - Insere um novo registro na tabela
+
+INSERT INTO tabela (coluna1,...) VALUES (valor1,...), (valor1,...), (valor1,...); - Insere múltiplos valores em uma tabela
+
+UPDATE tabela SET coluna1 = valor1, ... - Atualiza os valores de uma tabela
+
+UPDATE tabela SET coluna1 = valor1 WHERE condicao - Atualiza os valores de registros que sejam especificados pela condição WHERE
+
+--------------------------------------------------------------------------------------------------------------------
+COMANDOS DO SELECT
+
+SELECT * FROM DADOS - Busca todos os campos de uma tabela
+
+SELECT NOME, HORAS  FROM DADOS - Busca colunas específicas de uma tabela
+
+SELECT DISTINCT (NOME) FROM DADOS - Busca apenas informações únicas
+
+SELECT * FROM tabela WHERE condicao - Filtra a busca pelos parâmetros informados
+
+SELECT coluna1 AS coluna_nova FROM tabela - Retorna a informação de uma coluna utilizando um "apelido" para a mesma
+
+SELECT * FROM tabela1 INNER JOIN tabela2 ON codicoes - Busca informações de múltiplas tabelas utilizando o parâmetro JOIN
+
+SELECT COUNT (*) FROM tabela - Conta as linhas encontradas na consulta
+
+SELECT * FROM tabela ORDER BY coluna [DESC,ASC] - Ordena os resultados da busca
+
+SELECT * FROM tabela GROUP BY coluna - Agrupa os resultados de uma busca
+
+SELECT * FROM tabela WHERE coluna LIKE '%valor%' - Pesquisa por informações utilizando o operador LIKE
+
+SELECT * FROM tabela WHERE coluna RLIKE 'expressao_regular' - Pesquisa por informações utilizando uma expressão regular
+
+
+--------------------------------------------------------------------------------------------------------------------
+TIPOS PRIMITIVOS DADOS NUMERICOS 
+
+
+TINYINT — número inteiro muito pequeno (tiny)
+
+SMALLINT — número inteiro pequeno
+
+MEDIUMINT — número inteiro de tamanho médio
+
+INT — número inteiro de tamanho comum
+
+BIGINT — número inteiro de tamanho grande
+
+DECIMAL — número decimal, de ponto fixo
+
+FLOAT — número de ponto flutuante de precisão simples (32 bits)
+
+DOUBLE — número de ponto flutuante de precisão dupla (64 bits)
+
+BIT — um campo de um bit
+
+--------------------------------------------------------------------------------------------------------------------
+TIPOS PRIMITIVOS EM STRINGS 
+
+
+CHAR — uma cadeia de caracteres (string), de tamanho fixo e não-binária
+
+VARCHAR — uma string de tamanho variável e não-binária
+
+BINARY — uma string binária de tamanho fixo
+
+VARBINARY — uma string binária de tamanho variável
+
+BLOB — um BLOB (Binary Large OBject – OBjeto Grande Binário) pequeno
+
+TINYBLOB — um BLOB muito pequeno
+
+MEDIUMBLOB — um BLOB de tamanho médio
+
+LONGBLOB — um BLOB grande
+
+TINYTEXT — uma string não-binária e de tamanho bem reduzido
+
+TEXT — uma string não-binária e pequena
+
+MEDIUMTEXT — uma string de tamanho comum e não-binária
+
+LONGTEXT — uma string não-binária de tamanho grande
+
+ENUM — de acordo com o manual do MySQL, é uma string, com um valor que precisa ser selecionado de uma lista predefinida na criação da tabela
+
+SET — é um objeto que pode ter zero ou mais valores – cada um dos quais precisa ser escolhido de uma lista de valores predeterminados quando da criação da tabela
+
+--------------------------------------------------------------------------------------------------------------------
+
+TIPOS PRIMITIVOS EM ARMAZENAMENTO E DATAS
+
+DATE — o valor referente a uma data no formato 'CCYY-MM-DD'. Por exemplo 1985-11-25 (ano-mês-dia). O 'CC' se refere aos dois dígitos do século (Century, em inglês)
+
+TIME — um valor horário no formato 'hh:mm:ss' (hora:minutos:segundos)
+
+TIMESTAMP — timestamp é uma sequência de caracteres ou informação codificada que identifica uma marca temporal ou um dado momento em que um evento ocorreu. No MySQL, ele tem o formato 'CCYY-MM-DD hh:mm:ss' – neste caso, seguem a padronização ISO 8601
+
+YEAR — armazena um ano no formato 'CCYY' ou 'YY'
+
+--------------------------------------------------------------------------------------------------------------------
+TIPOS PRIMITIVOS DADOS ESPACIAIS
+
+GEOMETRY
+POINT
+LINESTRING
+POLYGON
+O GEOMETRY pode armazenar qualquer tipo de valor geométrico. Os outros valores simples (POINT, LINESTRING e POLYGON) têm seus valores restritos aos tipos geométricos a que se referem.
+Os outros, que seguem listados, carregam valores relativos a coleções/coletivos:
+
+GEOMETRYCOLLECTION
+MULTILINESTRING
+MULTIPOINT
+MULTIPOLYGON
+
+Assim, GEOMETRYCOLLECTION pode armazenar coletâneas de objetos de qualquer tipo. Os outros tipos coletivos (MULTILINESTRING, MULTIPOLYGON e GEOMETRYCOLLECTION) restringem-se a cada forma geométrica particular.
+

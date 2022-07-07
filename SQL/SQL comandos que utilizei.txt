@@ -1,0 +1,442 @@
+USANDO O TERMINAL DO SQL
+show databases; = mostrar base de dados criado. 
+use cadastro; = usando o terminal cadastro. 
+status; = status do banco de dados atual.
+show tables; = mostrar quais são as tabelas.
+describe "pessoas" = descreva "pessoas" que é a pasta criada. 
+; = final de comando 
+-------------------------------------------------------------------------------
+;= final de comando 
+create database = criando base de dados 
+create tabela = criando tabela
+default character set utf8 =  comando para palavras com caratecters especiais 
+default collate utf8_general_ci = comando para palavras com caratecters especiais 
+
+
+-----------------------------------------------------------------
+PRIMEIRO MODELO DO BANCO DE DADOS 
+
+create database cadadastro;
+
+create table pessoas ( 
+      nome varchar (30)
+      idade tinyint (3)
+      sexo char (1),
+      peso float,          
+      altura float,
+      nacionalidade varchar (20)
+);
+
+-------------------------------------------------------------------------------
+
+create database cadastro
+default character set utf8
+default collate utf8_general_ci;
+
+create table pessoas (
+nome  varchar (30) not null,      = codigo que permite que essa informação nunca fique em branco, e sempe apareça a informação compartilhada.
+nascimento  date,                 = data 
+sexo enum ('M' , 'F'),            = ele permite que somente os dados que esta no parentese seja usado.
+peso decimal (5,2),               
+altura decimal (3,2),              
+nacionalidade varchar (20) default 'brasil'        = sequencia de texto que pode ser grandes e limitamos atraves do "()".
+) default charset = utf8;         = permite que usamos caracteres com acento no padrao brasil         
+
+
+-----------------------------------------------------------------------------------
+
+insert into pessoas values        = inserir valores para tabela pessoas 
+(default, 'marcia ' ,'2000-03-04' ,'F', '99.0', '1.54', 'portugual'),
+(default, 'pedro ' ,'1999-03-04' ,'M', '69', '1.74', default),            =  cadastro de dados 
+(default, 'claudia ' ,'1979-03-04' ,'F', '69,7', '1.64', default);
+
+select * from pessoas             =  selecionar tabela pessoas 
+
+----------------------------------------------------------------------
+
+describe ou desc pessoas  = mostra a tabela pessoas e os registros 
+
+alter table pessoas                 = alterar tabela pessoas 
+add column profissao varchar (10);  = adicionar coluna profissao
+alter table pessoas                 = alterar tabela pessoas 
+drop column profissao;              = excluir coluna profissao
+add column profissao varchar (10) after nome = adicionar coluna profissao, depois de nome
+
+"add column codigo" ou "add codigo" = esses dois dá no mesmo
+modify column nome varchar (20);    = modifica a coluna e a formula variavel dela e quantos caracteres limites 
+
+alter table pessoas
+change column profissao prof varchar (20); = mudar o nome da coluna profissao para prof 
+
+alter table pessoas 
+rename to gafanhotos; = alterar a tabela pessoas para gafanhotos
+
+
+
+
+
+create table if not exists cursos = criar tabela se nao existir a tabela "cursos"
+( nome varchar(30) not null unique, = variavel de caracteres , nenhum campo nulo , unique nao deixa ocorre duplicidade de nome 
+descricao text,           = texto grande 
+carga  int  unsigned,    = numero inteiro, unsigned (economiza 1 byte para cada numero e indentifica que todos os numeros colocados sera positivo ou maior que zero)
+totaulas int,
+ano year  default '2016'
+) default charset = utf8;
+
+primary key = é uma chave primaria que nao deixa os nomes se repetirem por exemplo
+o codigo de matricula ou nome da pessoa nao podem ser os mesmos, pode ate ocorre de acontecer
+de pessoas de lugares diferentes ter o mesmo id de um curso, mas sempre vai ter algo no geral 
+que diferencia os dois, tipo endereço cpf e outros .
+
+unique= é quase igual a primary key, mas ele nao deixa de forma nenhuma as informações serem iguais, 
+por exemplo o nome 
+
+
+
+---------------------------------------------------------------------------
+
+
+create table if not exists cursos (
+nome varchar(30) not null unique, 
+descricao text,
+carga  int  unsigned,
+totaulas int unsigned,
+ano year  default '2016'
+) default charset = utf8;
+
+alter table cursos
+add column idcurso int first;
+
+alter table cursos 
+add primary key (idcurso);
+desc cursos;
+
+create table if not exists teste (
+id  int,
+nome varchar (20),
+idade int
+);
+
+insert into teste value 
+('1', 'pedro ' ,'22'),
+('2', 'caio' ,'25'),
+('3', 'mario' ,'45');
+
+select * from teste;
+
+drop table if exists teste;
+
+---------------------------------------------------------------------------------------
+
+update cursos         
+set nome = 'html5'            =  isso tudo serve para mudar o valor ou nome de um curso.
+where idcurso = '1';
+
+update cursos 
+set nome = 'PHP', ano = '2015'   = colocando outros exemplos 
+where idcurso = '4';
+
+update cursos 
+set nome = 'java', ano = '2015', carga = '40'  = outro exemplo 
+where idcurso = '5';
+select * from cursos;
+
+
+update cursos 
+set nome = 'java', ano = '2015', carga = '40'  = outro exemplo 
+where ano = '2015 '      = nesse caso ele atribuiria os valores para todos os cursos que fosse do ano de 2015.
+limit 1;                  = esse comando limita a uma linha ou mais, para que nao seja todos os valores alterados
+select * from cursos;
+
+delete from cursos
+where idcurso= '10';     = para deletar os cursos 
+
+truncate cursos;         = apaga todos os valores do cursos e os dados 
+
+
+drop= apaga a tabela com todos os dados
+truncate= apaga os dados e valores que esta dentro da tabela, mas ele deixa a tabela intacta.
+
+
+DDL - DATA DEFINITION LANGUAGE =  create database, create table, alter table, drop table
+
+
+
+
+
+DML - DATA MANIPULATION LANGUAGE = insert into, update, delete, truncate 
+
+
+
+
+-------------------------------------------------------------------------------
+
+
+
+
+update pessoas set nome = 'carla' where id = '7';       
+
+= atualizar (tabela pessoas) alterar nome para "carla'   esta no id '7'
+
+show databases = mostrar banco de dados 
+
+show create table 'amigos'=  ele mostra como a tabela foi criada.
+
+------------------------------------------------------------------------------
+
+order by nome; = ordernar os nomes em ordem crescente
+order by nome desc; = ordernar os nomes em ordem decrescente
+
+select nome, carga, ano from cursos
+order by nome;    = mostrar a ordem de nome, carga e ano (se quiser pode ate trocar as ordens)
+
+select ano, nome, carga from cursos
+order by ano,nome ; = aqui ele deixa em ordem ano e nome.
+
+
+select * from cursos
+where ano = '2016' = selecionar cursos, com ano de 2016, em ordem por nome.
+order by nome ;
+
+=  = sinal de igual 
+>=  = maior que 
+<=  = menor que            = todos esses simbolos filtra qualquer linha e coluna.	
+!= ou <> = diferente de 
+
+select nome, ano from cursos
+where ano between 2014 and 2016; = selecionar nome e ano em cursos, 
+onde  o ano seja entre 2014 a 2016.
+
+
+select nome, descricao, ano from cursos
+where ano in (2014, 2016, 2020) = esse selecionar os anos que esta entre o parenteses.
+
+
+-----------------------------------------------------------------------
+
+select * from cursos
+where nome like 'P%'  = selecionar cursos, selecionar todas as palavras com P
+
+'%P'  = se for assim ele colocar as palavras que tem a letra 'p' de menos 
+a primeira letra.
+
+'%P%' = palavras que tenha letra 'P' em qualquer lugar.
+
+where nome  not like '%a%' = que nao tenha a palavra 'a' em qualquer frase.
+
+
+where nome like 'ph%p_'; = filtrar letras começando com 'ph' que tenha 'p' 
+e um numero depois das letras iniciais.
+
+_ = sublinhado ou underline = filtra para a pessoas que quer algo que tenha 
+um caracter depois da palavra solicitada em uma linha ou coluna.
+
+
+use exemplo;
+select * from amigos
+where sobrenome like '%silva%';   = selecionar pessoas somente com sobrenome 
+silva.
+
+
+use cadastro;
+select distinct nacionalidade from gafanhotos  = selecionar a nacionalidade, em ordem.
+order by nacionalidade;
+
+distinct = nao deixa repetir nomes, paises ou numeros quaisquer das colunas
+e faz a filtragem bem resumida.
+
+count = quantidade total filtrada 
+
+select count(*) from cursos; = quantos cursos tem no total, ele mostras
+ o valor total da quantidade filtrada.
+
+select count(*) from cursos where carga >40; = ele mostra quantos cursos
+tem mais de 40 horas e mostra a quantidade filtrada.
+
+
+select max(carga) from cursos ; = selecione a carga maxima de um curso
+
+max = maximo
+
+select min(totaulas) from cursos ; = selecione o minimo de total de aulas de 
+cursos.
+
+min = minimo 
+
+
+select sum(totaulas) from cursos; = soma de todos os cursos 
+
+sum= soma 
+
+select avg (totaulas) from cursos; = media do total de aulas
+
+avg = media
+
+
+----------------------------------------------------------------------------
+
+
+
+select distinct totaulas, count(*) from cursos
+group by totaulas
+order by totaulas ;
+
+group = ele agrupa os dados 
+order = orderna os dados em crescente 
+count (*) = calcula a quantidade 
+
+
+select ano, count(*) from cursos   = selecione ano, e a quantidade 
+group by ano                  = agrupar os anos 
+order by count(*);            = em order e quantidade 
+
+select ano, count(*) from cursos = selecione ano e quantidade
+group by ano                = agrupar o ano 
+having count(ano) >=5       = que tem a quantidade em cursos maior que 5  
+order by count(*) desc;     = odernar quantidade e descreva
+
+
+having = tem ou mostrar (ele e igual o where para o group by)
+ele esta vinculado no ''group by'' 
+
+
+select carga, count(*) from cursos 
+where ano > '2015'                   = ele filtrou, agrupou e mostrou a media de carga dos cursos
+group by carga                      
+having carga > (select avg(carga ) from cursos);
+
+
+desc gafanhotos;
+alter table gafanhotos
+add column cursopreferido int;
+
+alter table gafanhotos 
+add foreign key (cursopreferido)
+references cursos(idcurso);
+
+
+add foreing key (cursopreferido) = adicionar chave estrangeira 
+references cursos (idcurso) = temos que mostrar o caminho para o banco de dados
+sabe aonde a chave estrangeira ficara.
+
+
+
+
+
+update gafanhotos set cursopreferido ='6' where id= '1'; = o id 1 terá o curso 6 como preferido
+
+update = alterar 
+
+
+
+delete from cursos where idcurso = '28'; = ele apaga o curso (em que a chave estrangeira nao esteja vinculada a ele)
+
+
+
+
+
+
+
+select gafanhotos.nome , cursos.nome, cursos.ano  = aqui sao as linhas que devem ser mostradas
+from gafanhotos join cursos         = ele junta a chave estrangeira (deixa as tabelas juntas) e filtrar 
+on cursos.idcurso = gafanhotos.cursopreferido;
+
+
+select gafanhotos.nome , cursos.nome, cursos.ano
+from gafanhotos inner join cursos      = pode ser usado tambem inner join 
+on cursos.idcurso = gafanhotos.cursopreferido
+order by gafanhotos.nome;           = nome dos gafanhotos em ordem 
+
+select g.nome , c.nome, c.ano
+from gafanhotos as g inner join cursos as c  = em from os nomes continua originais
+on c.idcurso = g.cursopreferido
+order by g.nome;
+
+as = ele diminui o codigo (gafanhotos ficou = g)
+voce transforma uma tabela com nome em uma letra 
+
+
+
+select g.nome , c.nome, c.ano
+from gafanhotos as g left join cursos as c   
+on c.idcurso = g.cursopreferido ;
+
+left outer join = mostra todos os filtros ate os que nao estao co-relacionados com a outra tabela e o left 
+deixa a tabela primeira a esquerda em preferencia da filtragem 
+
+select g.nome , c.nome, c.ano
+from gafanhotos as g right outer join cursos as c 
+on c.idcurso = g.cursopreferido ;
+
+right outer join = deixa a tabela da parte do lado direito com preferecia do filtro e coloca ate mesmo
+os cursos que nao tem nenhum aluno cadastrado em outra tabela
+
+------------------------------------------------------------------------------------------
+
+
+create table gafanhoto_assiste_curso (              criando tabela 
+id int not null auto_increment,
+data date,
+idgafanhoto int,
+idcurso int,                                    esses sao os atributos de cada linha
+primary key (id ),
+foreign key (idgafanhoto) references gafanhotos(id),
+foreign key (idcurso) references cursos(idcurso)          chaves estrangeiras 
+) default charset = utf8; 
+
+insert into gafanhoto_assiste_curso values 
+(default , "2014-03-01", '1', '2');         padrao de data para o id 1, e o id 2
+
+select * from gafanhoto_assiste_curso;
+
+
+
+select g.id, g.nome, a.idgafanhoto, idcurso from gafanhotos g 
+join gafanhoto_assiste_curso a 
+on g.id = a.idgafanhoto                      = nessa tabela resumimos as tabelas em letras depois reunimos as tabelas relacionais 
+order by g.nome;                              
+
+
+
+
+select g.nome, c.nome from gafanhotos g 
+join gafanhoto_assiste_curso a 
+on g.id = a.idgafanhoto
+join cursos c                                   = nesse usamos dois joins e vinculamos todas as tabelas.
+on c.idcurso = a.idcurso
+order by g.nome;
+
+
+
+
+
+----------------------------------------------------------------------------
+
+
+
+create table gafanhoto_assiste_curso (
+id int not null auto_increment,
+data date,
+idgafanhoto int,
+idcurso int,
+primary key (id ),
+foreign key (idgafanhoto) references gafanhotos(id),
+foreign key (idcurso) references cursos(idcurso)
+) default charset = utf8;
+
+insert into gafanhoto_assiste_curso values 
+(default , "2014-03-01", '1', '2');
+
+select * from gafanhoto_assiste_curso;
+
+
+select g.nome, c.nome from gafanhotos g 
+join gafanhoto_assiste_curso a 
+on g.id = a.idgafanhoto
+join cursos c 
+on c.idcurso = a.idcurso
+order by g.nome;
+
+
+
+
